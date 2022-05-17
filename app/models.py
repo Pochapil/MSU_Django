@@ -4,23 +4,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 
-class News(models.Model):
-    title = models.CharField(max_length=50, verbose_name="Заголовок")
-    text = models.CharField(max_length=100, verbose_name="Текст")
-    publishing_date = models.DateTimeField(verbose_name="дата публикации")
-
-    def __str__(self):
-        return self.title
-
-    class Meta:
-        verbose_name = u"Новость"
-        verbose_name_plural = u"Новости"
-
-
 class RestaurantChain(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название Сети")
     menu = models.OneToOneField('Menu', verbose_name="Меню", on_delete=models.CASCADE)
-    customer_rating = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
+    customer_satisfaction_score = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
                                         verbose_name="Оценка клиентов")
     owners_name = models.CharField(max_length=50, verbose_name="Имя владельца")
 
@@ -46,7 +33,7 @@ class Restaurant(models.Model):
 
 
 class Menu(models.Model):
-    dish = models.ManyToManyField('Dish', verbose_name="Блюдо", on_delete=models.CASCADE)
+    dish = models.ManyToManyField('Dish', verbose_name="Блюдо")
     serving_size = models.CharField(max_length=50, verbose_name="Размер порции")
     price = models.IntegerField(verbose_name="Цена")
 
@@ -57,8 +44,8 @@ class Menu(models.Model):
 
 class Dish(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название блюда")
-    dish_type = models.ForeignKey('DishTypes', verbose_name="Тип блюда", on_delete=models.SET_NULL, null=True)
-    description = models.CharField(max_length=50, verbose_name="Описание блюда")
+    dish_type = models.ForeignKey('DishType', verbose_name="Тип блюда", on_delete=models.SET_NULL, null=True)
+    description = models.TextField(verbose_name="Описание блюда")
 
     def __str__(self):
         return self.title
@@ -68,7 +55,7 @@ class Dish(models.Model):
         verbose_name_plural = u"Список Блюд"
 
 
-class DishTypes(models.Model):
+class DishType(models.Model):
     dish_type = models.CharField(max_length=50, verbose_name="Тип блюда")
 
     def __str__(self):

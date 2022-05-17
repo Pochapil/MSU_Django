@@ -1,9 +1,8 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpResponse
 
 
+# Create your views here.
 def year_archive(request, year):  # articles/<int:year>/
     return HttpResponse("Hello, it's year!")
 
@@ -18,3 +17,7 @@ def article_detail(request, year, month, slug):  # articles/<int:year>/<int:mont
 
 def index(request):  # /path
     return HttpResponse("Hello, world. It’s index")
+
+
+def index(request):
+    return render(request, 'app/index.html')
