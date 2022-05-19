@@ -6,9 +6,9 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class RestaurantChain(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название Сети")
-    menu = models.OneToOneField('Menu', verbose_name="Меню", on_delete=models.CASCADE)
+    menu = models.OneToOneField('Menu', verbose_name="Меню", on_delete=models.SET_NULL, null=True)
     customer_satisfaction_score = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
-                                        verbose_name="Оценка клиентов")
+                                                    verbose_name="Оценка клиентов")
     owners_name = models.CharField(max_length=50, verbose_name="Имя владельца")
 
     def __str__(self):
@@ -56,10 +56,10 @@ class Dish(models.Model):
 
 
 class DishType(models.Model):
-    dish_type = models.CharField(max_length=50, verbose_name="Тип блюда")
+    title = models.CharField(max_length=50, verbose_name="Тип блюда")
 
     def __str__(self):
-        return self.dish_type
+        return self.title
 
     class Meta:
         verbose_name = u"Тип блюда"

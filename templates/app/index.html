@@ -1,9 +1,60 @@
 {% extends "app/base.html" %}
 
 {% block title %}
-    Главная страница
+    {{ title }}
 {% endblock %}
 
+
+
+
 {% block content %}
-    <h1>Главная</h1>
+
+    <style>
+        .home-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+        }
+    </style>
+
+    <div class="home-container">
+
+        <h1>Главная</h1>
+
+        <div>
+            <h3>Browse</h3>
+            <hr>
+
+            <div>
+                <a href="{% url 'home' %}">All</a>
+            </div>
+
+            {% for dish_type in dish_types %}
+                <div>
+                    <a href="{% url 'home' %}?q={{ dish_type.title }}">{{ dish_type.title }}</a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+        <div>
+            <hr>
+            <div>
+
+                {% if dishes %}
+
+                    {% for dish in dishes %}
+                        <div class="alert alert-warning mt-2">
+                            <h3>{{ dish.title }}</h3>
+                            <p>{{ dish.dish_type }}</p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Нет записей</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
 {% endblock %}
