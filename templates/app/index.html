@@ -18,12 +18,14 @@
 
     <div class="home-container">
 
-        <h1>Главная</h1>
 
         <div>
+            <h1>Главная</h1>
             <h3>Browse</h3>
             <hr>
-
+            <form method="get" action={% url 'home' %}>
+                <input type="text" name="q" placeholder="Search food"/>
+            </form>
             <div>
                 <a href="{% url 'home' %}">All</a>
             </div>
@@ -38,7 +40,6 @@
 
 
         <div>
-            <hr>
             <div>
 
                 {% if dishes %}
@@ -47,6 +48,7 @@
                         <div class="alert alert-warning mt-2">
                             <h3>{{ dish.title }}</h3>
                             <p>{{ dish.dish_type }}</p>
+
                         </div>
                     {% endfor %}
                 {% else %}
