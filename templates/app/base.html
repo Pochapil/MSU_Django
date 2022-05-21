@@ -13,7 +13,7 @@
 <body>
 <!navigation>
 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+    <a href="{% url 'home' %}" class="d-flex align-items-center text-dark text-decoration-none">
         <span class="fs-4">Ресторанте</span>
     </a>
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
@@ -21,6 +21,9 @@
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'about' %}">Про нас</a>
     </nav>
 
+    <form method="get" action={% url 'home' %}>
+        <input type="text" name="q" placeholder="Search {{ object_type_for_search }}"/>
+    </form>
 </div>
 
 <div class="container">

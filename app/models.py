@@ -4,11 +4,10 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 # Create your models here.
 class RestaurantChain(models.Model):
-    title = models.CharField(max_length=50, verbose_name="Название Сети")
+    title = models.CharField(max_length=50, verbose_name="Название")
     menu = models.OneToOneField('Menu', verbose_name="Меню", on_delete=models.SET_NULL, null=True)
     customer_satisfaction_score = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)],
                                                     verbose_name="Оценка клиентов")
-    owners_name = models.CharField(max_length=50, verbose_name="Имя владельца")
 
     def __str__(self):
         return self.title
@@ -19,9 +18,11 @@ class RestaurantChain(models.Model):
 
 
 class Restaurant(models.Model):
-    restaurant_chain = models.ForeignKey(RestaurantChain, verbose_name="Сеть ресторанов", on_delete=models.CASCADE)
+    restaurant_chain = models.ForeignKey(RestaurantChain, verbose_name="Название сети ресторанов",
+                                         on_delete=models.CASCADE)
     address = models.CharField(max_length=50, verbose_name="Адрес")
-    manager_name = models.CharField(max_length=50, verbose_name="Имя менеджера")
+    phone_number = models.OneToOneField('PhoneNumber', verbose_name="Номер телефона", on_delete=models.SET_NULL,
+                                        null=True)
 
     def __str__(self):
         return self.restaurant_chain.title
@@ -44,7 +45,7 @@ class Menu(models.Model):
 class Dish(models.Model):
     title = models.CharField(max_length=50, verbose_name="Название блюда")
     dish_type = models.ForeignKey('DishType', verbose_name="Тип блюда", on_delete=models.SET_NULL, null=True)
-    description = models.TextField(verbose_name="Описание блюда")
+    description = models.TextField(verbose_name="Описание блюда", null=True)
     ingredient_list = models.ManyToManyField('Ingredient', verbose_name="Список ингредиентов")
 
     def __str__(self):
@@ -75,3 +76,14 @@ class Ingredient(models.Model):
     class Meta:
         verbose_name = u"Ингредиент"
         verbose_name_plural = u"Ингредиенты"
+
+
+class PhoneNumber(models.Model):
+    phone_number = models.CharField(max_length=50, verbose_name="Номер телефона")
+
+    def __str__(self):
+        return self.phone_number
+
+    class Meta:
+        verbose_name = u"Номер телефона"
+        verbose_name_plural = u"Номера телефонов"
