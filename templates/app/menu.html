@@ -4,6 +4,12 @@
     {{ title }}
 {% endblock %}
 
+{% block search_bar %}
+    <form method="get" action={% url 'menu' %}>
+        <input type="text" name="q" placeholder="Search {{ object_type_for_search }}"/>
+    </form>
+{% endblock %}
+
 
 {% block content %}
 
