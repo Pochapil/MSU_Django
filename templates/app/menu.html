@@ -1,10 +1,76 @@
 {% extends "app/base.html" %}
 
 {% block title %}
-    Меню
+    {{ title }}
 {% endblock %}
 
 
 {% block content %}
-    <h1>Меню</h1>
+
+    <style>
+        .home-container {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+        }
+    </style>
+
+    <style>
+        .box {
+            padding: 30px 30px;
+            box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
+            transition: all ease-in-out 0.3s;
+            background: #f8f9fa;
+            border-bottom: 1px solid rgba(12, 11, 9, 0.6);
+            top: 40px;
+            border-radius: 50px
+        }
+
+    </style>
+
+
+    <div class="home-container">
+
+
+        <div>
+            <h1>Меню</h1>
+            <h3>Browse</h3>
+            <hr>
+
+            <div>
+                <a href="{% url 'menu' %}">All</a>
+            </div>
+
+            {% for dish_type in dish_types %}
+                <div>
+                    <a href="{% url 'menu' %}?q={{ dish_type.title }}">{{ dish_type.title }}</a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+        <div>
+            <div>
+
+                {% if dishes %}
+
+                    {% for dish in dishes %}
+                        <div class="box">
+                            <h3>{{ dish.title }}</h3>
+                            <p>{{ dish.dish_type }}</p>
+                            <p> Состав:
+                                {% for ingr in dish.ingredient_list.all %}
+                                    {{ ingr }},
+                                {% endfor %}
+                            </p>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>Нет записей</p>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
 {% endblock %}

@@ -8,53 +8,72 @@
 
 
 {% block content %}
-
-    <style>
-        .home-container {
-            display: grid;
-            grid-template-columns: 1fr 3fr;
-        }
-    </style>
-
-    <div class="home-container">
-
-
+    <div class="carousel-content"><h2 class="animate__animated animate__fadeInDown">Sequi ea ut et est quaerat</h2>
+        <p class="animate__animated animate__fadeInUp">Ut velit est quam dolor ad a aliquid qui aliquid. Sequi ea ut et
+            est
+            quaerat sequi nihil ut aliquam. Occaecati alias dolorem mollitia ut. Similique ea voluptatem. Esse
+            doloremque
+            accusamus repellendus deleniti vel. Minus et tempore modi architecto.</p>
         <div>
-            <h1>Главная</h1>
-            <h3>Browse</h3>
-            <hr>
-
-            <div>
-                <a href="{% url 'home' %}">All</a>
-            </div>
-
-            {% for dish_type in dish_types %}
-                <div>
-                    <a href="{% url 'home' %}?q={{ dish_type.title }}">{{ dish_type.title }}</a>
-                </div>
-            {% endfor %}
-
+            <a href="{% url 'menu' %}" class="btn-menu animate__animated animate__fadeInUp scrollto">Наше меню</a>
+            <a href="{% url 'restaurants' %}" class="btn-book animate__animated animate__fadeInUp scrollto">Наши
+                рестораны</a>
         </div>
 
+        <style>
+            .btn-menu, .btn-book {
+                font-weight: 600;
+                font-size: 13px;
+                letter-spacing: 0.5px;
+                text-transform: uppercase;
+                display: inline-block;
+                padding: 12px 30px;
+                border-radius: 50px;
+                transition: 0.3s;
+                line-height: 1;
+                color: black;
+                border: 2px solid #cda45e;
+            }
+        </style>
 
-        <div>
-            <div>
 
-                {% if dishes %}
-
-                    {% for dish in dishes %}
-                        <div class="alert alert-warning mt-2">
-                            <h3>{{ dish.title }}</h3>
-                            <p>{{ dish.dish_type }}</p>
-
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>Нет записей</p>
-                {% endif %}
+        <div class="col-lg-8"><h1>Welcome to <span>Restaurantly</span></h1>
+            <h2>Delivering great food for more than 18 years!</h2>
+            <div class="btns">
+                <a href="{% url 'menu' %}" class="btn-menu animated fadeInUp scrollto">Our Menu</a>
+                <a href="{% url 'restaurants' %}" class="btn-book animated fadeInUp scrollto">Book a Table</a>
             </div>
         </div>
 
     </div>
+    <style>
+        .menu-filters li {
+            cursor: pointer;
+            display: inline-block;
+            padding: 8px 12px 10px 12px;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1;
+            color: #fff;
+            margin-bottom: 10px;
+            transition: all ease-in-out 0.3s;
+            border-radius: 50px;
+            font-family: "Playfair Display", serif;
+        }
+    </style>
+
+    <section id="menu">
+        <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="menu-filters">
+                <li data-filter="*" class="menu-filters">All</li>
+                <li data-filter="menu-filters">Starters</li>
+                <li data-filter=".filter-salads">Salads</li>
+                <li data-filter=".filter-specialty">Specialty</li>
+            </ul>
+        </div>
+    </section>
+
+    <h1>Рестораны</h1>
+
 
 {% endblock %}

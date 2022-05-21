@@ -6,6 +6,15 @@ from django.db.models import Q
 
 # Create your views here.
 def index(request):
+
+    return render(request, 'app/index.html')
+
+
+def about(request):
+    return render(request, 'app/about.html')
+
+
+def menu(request):
     q = request.GET.get('q') if request.GET.get('q') is not None else ''
     dishes = Dish.objects.filter(
         Q(dish_type__title__icontains=q) |
@@ -15,10 +24,11 @@ def index(request):
     # dishes = Dish.objects.all()
     # .order_by('id')
     object_type_for_search = 'dish'
-    context = {'title': 'Главная', 'dishes': dishes, 'dish_types': dish_types,
+    context = {'title': 'Меню', 'dishes': dishes, 'dish_types': dish_types,
                'object_type_for_search': object_type_for_search}
-    return render(request, 'app/index.html', context)
+
+    return render(request, 'app/menu.html', context)
 
 
-def about(request):
-    return render(request, 'app/about.html')
+def restaurant(request):
+    return render(request, 'app/restaurant.html')
