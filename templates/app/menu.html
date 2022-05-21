@@ -22,6 +22,7 @@
 
     <style>
         .box {
+            margin-top: 32px;
             padding: 30px 30px;
             box-shadow: 0px 2px 15px rgb(0 0 0 / 10%);
             transition: all ease-in-out 0.3s;
@@ -39,11 +40,11 @@
 
         <div>
             <h1>Меню</h1>
-            <h3>Browse</h3>
+            <h3>Типы блюд</h3>
             <hr>
 
             <div>
-                <a href="{% url 'menu' %}">All</a>
+                <a href="{% url 'menu' %}">Все</a>
             </div>
 
             {% for dish_type in dish_types %}
