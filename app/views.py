@@ -1,6 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Dish, DishType, Menu, MenuItem, Restaurant
+from .models import Dish, DishType, MenuItem, Restaurant
 from django.db.models import Q
 
 
