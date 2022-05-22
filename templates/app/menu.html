@@ -75,17 +75,17 @@
         <div>
             <div>
 
-                {% if dishes %}
+                {% if menu_list %}
 
-                    {% for dish in dishes %}
+                    {% for menu_item in menu_list %}
+
                         <div class="box">
-                            <h3>{{ dish.title }}</h3>
-                            <p>{{ dish.dish_type }}</p>
-                            <p> Состав:
-                                {% for ingr in dish.ingredient_list.all %}
-                                    {{ ingr }},
-                                {% endfor %}
-                            </p>
+                            <div>
+                                <h3>{{ menu_item.dish.title }} цена = {{ menu_item.price }}</h3>
+                                <a href="{% url 'dish' %}?name={{ menu_item.dish.title }}">подробнее о {{ menu_item.dish.title }}></a>
+                            </div>
+                            <p>{{ menu_item.dish.dish_type }}</p>
+
                         </div>
                     {% endfor %}
                 {% else %}
