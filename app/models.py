@@ -25,7 +25,7 @@ class Restaurant(models.Model):
                                         null=True)
 
     def __str__(self):
-        return self.restaurant_chain.title
+        return self.restaurant_chain.title + " на " + self.address
 
     class Meta:
         verbose_name = u"Ресторан"
@@ -33,13 +33,28 @@ class Restaurant(models.Model):
 
 
 class Menu(models.Model):
-    dish = models.ForeignKey('Dish', verbose_name="Блюдо", on_delete=models.CASCADE)
-    serving_size = models.CharField(max_length=50, verbose_name="Размер порции")
-    price = models.IntegerField(verbose_name="Цена")
+    title = models.CharField(max_length=50, verbose_name="Название")
+    menu_list = models.ManyToManyField('MenuItem', verbose_name="Меню")
+
+    def __str__(self):
+        return "Меню ресторана " + self.title
 
     class Meta:
         verbose_name = u"Меню"
         verbose_name_plural = u"Список меню"
+
+
+class MenuItem(models.Model):
+    dish = models.OneToOneField('Dish', verbose_name="Блюдо", on_delete=models.CASCADE)
+    serving_size = models.CharField(max_length=50, verbose_name="Размер порции")
+    price = models.IntegerField(verbose_name="Цена")
+
+    def __str__(self):
+        return self.dish.title + " " + str(self.price)
+
+    class Meta:
+        verbose_name = u"Позиция в меню"
+        verbose_name_plural = u"Позиции меню"
 
 
 class Dish(models.Model):

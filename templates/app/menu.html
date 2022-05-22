@@ -13,6 +13,8 @@
 
 {% block content %}
 
+    <h1>Меню</h1>
+
     <style>
         .home-container {
             display: grid;
@@ -34,22 +36,36 @@
 
     </style>
 
+    <style>
+        .btn-menu, .btn-book {
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: 0.3s;
+            line-height: 1;
+            color: black;
+            border: 2px solid #cda45e;
+        }
+    </style>
 
     <div class="home-container">
 
-
         <div>
-            <h1>Меню</h1>
+
             <h3>Типы блюд</h3>
             <hr>
 
             <div>
-                <a href="{% url 'menu' %}">Все</a>
+                <a href="{% url 'menu' %}" class="btn-menu">Все</a>
             </div>
 
             {% for dish_type in dish_types %}
                 <div>
-                    <a href="{% url 'menu' %}?q={{ dish_type.title }}">{{ dish_type.title }}</a>
+                    <a href="{% url 'menu' %}?q={{ dish_type.title }}" class="btn-menu">{{ dish_type.title }}</a>
                 </div>
             {% endfor %}
 
