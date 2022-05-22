@@ -8,11 +8,21 @@
 }
 
 .footer-top {
-
     border-top: 1px solid #37332a;
     border-bottom: 1px solid #28251f;
     padding: 60px 0 30px 0;
     margin-top: 80px;
+}
+
+.footer-top .footer-links ul li {
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    color: black
+}
+
+a {
+    color: black;
 }
 
 .btn-menu, .btn-book {
@@ -29,7 +39,6 @@
     border: 2px solid #cda45e;
     margin-top: 5px;
 }
-
 
 .menu-filters li {
     cursor: pointer;
