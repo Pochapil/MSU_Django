@@ -6,7 +6,7 @@
 
 {% block search_bar %}
     <form method="get" action={% url 'restaurant_list' %}>
-        <input type="text" name="q" placeholder="Search {{ object_type_for_search }}"/>
+        <input type="text" name="q" placeholder="Искать {{ object_type_for_search }}"/>
     </form>
 {% endblock %}
 

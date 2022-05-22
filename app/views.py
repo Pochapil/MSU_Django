@@ -23,7 +23,7 @@ def menu(request):
     dish_types = DishType.objects.all()
     # dishes = Dish.objects.all()
     # .order_by('id')
-    object_type_for_search = 'dish'
+    object_type_for_search = 'блюдо'
     context = {'title': 'Меню', 'menu_list': menu_list, 'dish_types': dish_types,
                'object_type_for_search': object_type_for_search}
 
@@ -34,7 +34,7 @@ def restaurant_list(request):
     q = request.GET.get('q') if request.GET.get('q') is not None else ''
 
     restaurant_list = Restaurant.objects.filter(address__icontains=q).order_by('address')
-    object_type_for_search = 'restaurant'
+    object_type_for_search = 'ресторан'
     context = {'title': 'Список ресторанов', 'restaurant_list': restaurant_list,
                'object_type_for_search': object_type_for_search}
 
