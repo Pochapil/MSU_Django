@@ -1,0 +1,25 @@
+{% extends "app/base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block search_bar %}
+    <form method="get" action={% url 'restaurant_list' %}>
+        <input type="text" name="q" placeholder="Search {{ object_type_for_search }}"/>
+    </form>
+{% endblock %}
+
+
+{% block content %}
+
+    {% for restaurant in restaurant_list %}
+
+        <div>
+            <h1>{{ restaurant.restaurant_chain.title }} на {{ restaurant.address }}</h1>
+            <a href="{% url 'restaurant' %}?id={{ restaurant.pk }}">подробнее о ресторане></a>
+        </div>
+
+    {% endfor %}
+
+{% endblock %}

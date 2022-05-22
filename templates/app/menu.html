@@ -49,6 +49,7 @@
             line-height: 1;
             color: black;
             border: 2px solid #cda45e;
+            margin-top: 5px;
         }
     </style>
 
@@ -81,8 +82,8 @@
 
                         <div class="box">
                             <div>
-                                <h3>{{ menu_item.dish.title }} цена = {{ menu_item.price }}</h3>
-                                <a href="{% url 'dish' %}?name={{ menu_item.dish.title }}">подробнее о {{ menu_item.dish.title }}></a>
+                                <h3>{{ menu_item.dish.title }}............цена = {{ menu_item.price }}</h3>
+                                <a href="{% url 'dish' %}?id={{ menu_item.dish.pk }}">подробнее о блюде></a>
                             </div>
                             <p>{{ menu_item.dish.dish_type }}</p>
 

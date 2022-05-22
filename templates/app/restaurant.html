@@ -1,14 +1,14 @@
 {% extends "app/base.html" %}
 
 {% block title %}
-    Рестораны
+    {{ title }}
 {% endblock %}
 
 
 {% block content %}
+    <h1>Сеть ресторанов - {{ restaurant.restaurant_chain.title }}</h1>
 
-    <h1>Рестораны</h1>
+    <p> Адрес - {{ restaurant.address }} </p>
 
+    <p> Телефон {{ restaurant.phone_number }} </p>
 {% endblock %}
-
-
