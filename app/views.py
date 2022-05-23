@@ -42,7 +42,7 @@ def restaurant_list(request):
 
 def dish(request):
     dish_id = request.GET.get('id')
-    dish = Dish.objects.get(pk__exact=dish_id)
+    dish = Dish.objects.get(pk=dish_id)
     dish_title = dish.title
     context = {'title': dish_title, 'dish': dish}
     return render(request, 'app/dish.html', context)
@@ -50,7 +50,7 @@ def dish(request):
 
 def restaurant(request):
     restaurant_id = request.GET.get('id')
-    restaurant = Restaurant.objects.get(pk__exact=restaurant_id)
+    restaurant = Restaurant.objects.get(pk=restaurant_id)
     title = restaurant.restaurant_chain.title
     context = {'title': title, 'restaurant': restaurant}
     return render(request, 'app/restaurant.html', context)
